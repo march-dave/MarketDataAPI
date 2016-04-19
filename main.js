@@ -3,7 +3,7 @@
 $(function() {
   $('.lookupForm').submit(getCompany);
   $('table').on('click', '.quote', getCard);
-  momentTimer();
+  // momentTimer();
 });
 
 // function momentTimer() {

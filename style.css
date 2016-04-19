@@ -4,15 +4,13 @@
   margin: 10px;
   display: inline-block;
   min-width: 200px;
+  display: none;
 }
 
-#singleCompany {
-  display: none;
+#company {
+  /*display: none;*/
 
 } 
-
-
-
 
 .card {
   border: 1px solid #000;

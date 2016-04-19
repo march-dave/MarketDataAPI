@@ -1,8 +1,6 @@
 'use strict';
 
 $(function() {
-  // $('.personForm').submit(getPerson);
-  // renderPeople();
   $('.lookupForm').submit(getCompany);
   $('#company').on('click', '.card', getCard);
 });
@@ -43,21 +41,13 @@ function getCard(e) {
 
 function getQuotes(symbol) {
 
- // var url = `http://dev.markitondemand.com/MODApis/Api/v2/Lookup/jsonp?input=${inputCat}&callback=?`;
   var url = `http://dev.markitondemand.com/MODApis/Api/v2/Quote/jsonp?symbol=${symbol}&callback=?`;
   $.getJSON({
     url: url,
     success: function(companyTrackData) {
-      // var $company = makeCompanyList(companyData);
-      // $('.company').append($company);
-
-      // console.log('companyTrackData: ', companyTrackData.Name);
-      // console.log('companyTrackData: ', companyTrackData.Symbol);
-      // console.log('companyTrackData: ', companyTrackData.High);
-      // console.log('companyTrackData: ', companyTrackData.Low);
-
+      
       var $track = makeCompanyTrack(companyTrackData);
-      $('.company').append($track);
+      $('#companyTrack').append($track);
 
       // var $companyCards = companyData.map(makeCompanyList);
       // $('.company').append($companyCards);
@@ -78,9 +68,7 @@ function makeCompanyTrack(companyTrackData) {
 
   $card.append($name, $symbol, $high, $low);
   return $card;
-
 }
-
 
 function getCompany() {
   event.preventDefault();
@@ -94,7 +82,7 @@ function getCompany() {
       // $('.company').append($company);
 
       var $companyCards = companyData.map(makeCompanyList);
-      $('.company').append($companyCards);
+      $('.company').show().append($companyCards);
     },
     error: function(err) {
       console.error(err);

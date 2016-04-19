@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AJAX</title>
+  <title>Market Data API</title>
   <link rel="stylesheet" href="style.css">
   <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script src="main.js"></script>
 </head>
 <body>
-  <h1>AJAX Stuff</h1>
+  <h1>Market Data API</h1>
   
-  <form class='personForm'>
+ <!--  <form class='personForm'>
     <input type="number" class="personNumber" min=1 max=88 required value=1>
     <button type='submit' class="getPerson">Get Person</button>
   </form>
@@ -20,7 +20,19 @@
     <button class="next">Next Page</button>
   </div>
 
-  <div class="people"></div>
+  <div class="people"></div> -->
+  <form class='lookupForm'>
+    <input type="text" class="inputCategory" required vaule='temp data' placeholder="SYMBOL" />
+    <button type='submit' class="getCompany">Get Company</button>
+  </form>
+
+  <div id='company' class="company"></div>
+
+<!--   <div id='singleCompany' class='singleCompany'>
+    <h3 class='exchange'></h3>
+    <p class='name'></p>
+    <p class='symbol'></p>
+  </div> -->
   
 </body>
 </html>

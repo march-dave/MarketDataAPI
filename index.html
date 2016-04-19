@@ -8,23 +8,19 @@
   <link rel="stylesheet" href="style.css">
   <script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
   <script src="main.js"></script>
 </head>
 <body>
   <h1>Market Data API</h1>
   
- <!--  <form class='personForm'>
-    <input type="number" class="personNumber" min=1 max=88 required value=1>
-    <button type='submit' class="getPerson">Get Person</button>
-  </form>
+  <div class='hero-face'>
 
-  <div>
-    <button class="prev">Previous Page</button>
-    <button class="next">Next Page</button>
   </div>
 
-  <div class="people"></div> -->
-  <form class='lookupForm'>
+
+   <form class='lookupForm'>
     <input type="text" class="inputCategory" required vaule='temp data' placeholder="SYMBOL" />
     <button type='submit' class="getCompany">Get Company</button>
   </form>
@@ -33,20 +29,17 @@
   <div id='companyTrack'></div>
 
 
- <!--  <div class="container-fluid">
+  <div class="container-fluid">
 
   <h3>Company List</h3>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Image</th> 
+          <th>Exchange</th>
           <th>Name</th>
-          <th>Phone</th>
-          <th>Address</th>
-          <th>Email</th>
-          <th>Birthday</th>
-          <th>Favorite</th>
+          <th>Symbol</th>
+          <th></th> 
         </tr>
       </thead>
       <tbody>
@@ -54,14 +47,7 @@
       </tbody>
         
     </table>
-  </div> -->
-
-
-<!--   <div id='singleCompany' class='singleCompany'>
-    <h3 class='exchange'></h3>
-    <p class='name'></p>
-    <p class='symbol'></p>
-  </div> -->
+  </div>
   
 </body>
 </html>

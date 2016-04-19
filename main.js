@@ -2,27 +2,22 @@
 
 $(function() {
   $('.lookupForm').submit(getCompany);
-  $('#company').on('click', '.card', getCard);
+  $('table').on('click', '.quote', getCard);
+  momentTimer();
 });
 
-// http://dev.markitondemand.com/MODApis/Api/v2/Lookup/jsonp?input=computer&callback=myFunction
-// $.getJSON('http://dev.markitondemand.com/MODApis/Api/v2/Lookup/jsonp?input=NFLX&callback=?')`
-
-// http://dev.markitondemand.com/MODApis/Api/v2/Quote/jsonp?symbol=CPSI&callback=?
-// http://dev.markitondemand.com/MODApis/Api/v2/Quote/jsonp?symbol=CPSI&callback=myFunction
+// function momentTimer() {
+//   $('.hero-face').text(moment().format());
+// }
 
 function getCard(e) {
 
-  // MarketDataStorage.write
-
   var company = MarketDataStorage.get();
-  // console.log($(this).children());
+  var exchange = $(this).parent().parent().children()[0].textContent;
+  var name = $(this).parent().parent().children()[1].textContent;
+  var symbol = $(this).parent().parent().children()[2].textContent;
 
-  var arr = $(this).children();
-   
-  var exchange = $(arr[0]).text(); 
-  var name = $(arr[1]).text(); 
-  var symbol = $(arr[2]).text(); 
+  $(this).parent().parent().remove();
 
   var obj = {};
   obj.exchange = exchange;
@@ -30,8 +25,7 @@ function getCard(e) {
   obj.symbol = symbol;
   company.push(obj);
 
-  var arrSymbol = symbol.split(': ');
-  getQuotes(arrSymbol[1]);
+  getQuotes(symbol);
 
   MarketDataStorage.write(company);
 
@@ -48,9 +42,6 @@ function getQuotes(symbol) {
       
       var $track = makeCompanyTrack(companyTrackData);
       $('#companyTrack').append($track);
-
-      // var $companyCards = companyData.map(makeCompanyList);
-      // $('.company').append($companyCards);
     },
     error: function(err) {
       console.error(err);
@@ -78,11 +69,8 @@ function getCompany() {
   $.getJSON({
     url: url,
     success: function(companyData) {
-      // var $company = makeCompanyList(companyData);
-      // $('.company').append($company);
-
       var $companyCards = companyData.map(makeCompanyList);
-      $('.company').show().append($companyCards);
+      $('table').show().append($companyCards);
     },
     error: function(err) {
       console.error(err);
@@ -91,12 +79,13 @@ function getCompany() {
 }
 
 function makeCompanyList(companyObj) {
-  var $card = $('<div>').addClass('card');
-  var $exchange = $('<p>').text(`Exchange: ${companyObj.Exchange}`);
-  var $name = $('<p>').text(`Name: ${companyObj.Name}`);
-  var $symbol = $('<p>').text(`Symbol: ${companyObj.Symbol}`);
+  var $card = $('<tr>').addClass('contactList');
+  var $exchange = $('<td>').text(`${companyObj.Exchange}`);
+  var $name = $('<td>').text(`${companyObj.Name}`);
+  var $symbol = $('<td>').text(`${companyObj.Symbol}`);
+  var $button = $('<td>').append('<button class="quote">Quote</button>');
 
-  $card.append($exchange, $name, $symbol);
+  $card.append($exchange, $name, $symbol, $button);
   return $card;
 }
 
@@ -113,73 +102,3 @@ var MarketDataStorage = {
     localStorage.Stocks = JSON.stringify(companyList);
   }
 };
-
-// function makeCompanyList(companyData) {
-//   var array = [];
-//   for (var i=0; i<companyData.length; i++) {
-//     var $card = $('#singleCompany').clone().removeAttr('id');
-//     $card.find('.exchange').text('Exchange: ' + companyData[i].Exchange);
-//     $card.find('.name').text('Name: ' + companyData[i].Name);
-//     $card.find('.symbol').text('Symbol: ' + companyData[i].Symbol);
-   
-//      array.push($card);
-//   }
-
-//   $('#company').append(array);
-
-// }
-
-
-
-// function renderCompany(page) {
-//   $.ajax(`http://swapi.co/api/people/?page=${page}`)
-//     .done(function(data) {
-//       var personObjs = data.results;
-//       var $personCards = personObjs.map(makePersonCard);
-//       $('.people').append($personCards);
-//     })
-//     .fail(function(err) {
-//       console.error(err);
-//     });
-// }
-
-
-
-// // $.getJSON('http://dev.markitondemand.com/MODApis/Api/v2/Lookup/jsonp?input=NFLX&callback=?')`
-// function renderPeople(page) {
-//   $.ajax(`http://swapi.co/api/people/?page=${page}`)
-//     .done(function(data) {
-//       var personObjs = data.results;
-//       var $personCards = personObjs.map(makePersonCard);
-//       $('.people').append($personCards);
-//     })
-//     .fail(function(err) {
-//       console.error(err);
-//     });
-// }
-
-// function makePersonCard(personObj) {
-//   var $card = $('<div>').addClass('card');
-//   var $name = $('<p>').text(`Name: ${personObj.name}`);
-//   var $birth = $('<p>').text(`Birth: ${personObj.birth_year}`);
-//   var $gender = $('<p>').text(`Gender: ${personObj.gender}`);
-
-//   $card.append($name, $birth, $gender);
-//   return $card;
-// }
-
-// function getPerson(event) {
-//   event.preventDefault();
-//   var personNum = $('.personNumber').val();
-
-//   $.ajax({
-//     url: `http://swapi.co/api/people/${personNum}/`,
-//     success: function(personData) {
-//       var $person = makePersonCard(personData);
-//       $('.people').append($person);
-//     },
-//     error: function(err) {
-//       console.error(err);
-//     }
-//   });
-// }
